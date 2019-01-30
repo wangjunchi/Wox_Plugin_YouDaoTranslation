@@ -1,0 +1,12 @@
+{
+    "ID":"D2D2C23B084D411DB66FE0C79D6C2A87",   
+    "ActionKeyword":"ydt",                    
+    "Name":"yd_translation",                            
+    "Description":"translation with yd",    
+    "Author":"junchi",                     
+    "Version":"0.0.1",                      
+    "Language":"python",                    
+    "Website":"http://wangjunchi.github.io",         
+    "IcoPath": "Images\\pic.png",              
+    "ExecuteFileName":"main.py"   
+  }
