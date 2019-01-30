@@ -1,0 +1,6 @@
+{
+    "url": "http://openapi.youdao.com/api",
+    "appID": "你的应用id",
+    "appKey": "你的appkey",
+    "salt": "233"
+}
