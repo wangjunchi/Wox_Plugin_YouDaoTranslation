@@ -6,13 +6,6 @@ from urllib import parse
 import hashlib
 
 
-appID = '5ad5f54f99d85b29'
-appKey = '9UHXVW93LNJ0ig54NXBHzsO8M807ECTE'
-md5 = ''
-salt='233'
-
-
-
 #用户写的Python类必须继承Wox类 https://github.com/qianlifeng/Wox/blob/master/PythonHome/wox.py
 #这里的Wox基类做了一些工作，简化了与Wox通信的步骤。
 class Main(Wox):
@@ -49,20 +42,19 @@ class Main(Wox):
 
     basic_flag = res.__contains__('basic')
     web_flag = res.__contains__('web')
-   # web_flag = False
     if res['errorCode']=='0':
       if basic_flag:
         basic = res['basic']
 
       results.append({
-        "Title": format(res['translation']).strip('[]\'') + " " + (basic['phonetic'] if(basic_flag) else ''),
+        "Title": format(res['translation']).replace('[','').replace(']','').replace('\'','') + " " + (basic['phonetic'] if(basic_flag) else ''),
         "SubTitle": "翻译结果",
         "IcoPath":"Images/app.ico"
       })
 
       if basic_flag:
         results.append({
-          "Title": format(basic['explains']).strip('\'[]'),
+          "Title": format(basic['explains']).replace('[','').replace(']','').replace('\'',''),
           "SubTitle": "基本释义",
           "IcoPath":"Images/app.ico",
         })
@@ -72,7 +64,7 @@ class Main(Wox):
         for i in range(len(web)):
           web_res = web[i]
           results.append({
-          "Title": format(web_res['value']),
+          "Title": format(web_res['value']).replace('[','').replace(']','').replace('\'',''),
           "SubTitle": "网络释义: " + web_res['key'],
           "IcoPath":"Images/app.ico"
         })
@@ -80,28 +72,13 @@ class Main(Wox):
 
 
     return results
-    '''
-    for i in bs.select(".comhead"):
-      title = i.previous_sibling.text
-      url = i.previous_sibling["href"]
-      results.append({
-        "Title": title ,
-        "SubTitle":title,
-        "IcoPath":"Images/app.ico",
-        "JsonRPCAction":{
-          #这里除了自已定义的方法，还可以调用Wox的API。调用格式如下：Wox.xxxx方法名
-          #方法名字可以从这里查阅https://github.com/qianlifeng/Wox/blob/master/Wox.Plugin/IPublicAPI.cs 直接同名方法即可
-          "method": "openUrl",
-          #参数必须以数组的形式传过去
-          "parameters":[url],
-          #是否隐藏窗口
-          "dontHideAfterAction":True
-        }
-      })
-      '''
-  
-
 
 #以下代码是必须的
 if __name__ == "__main__":
+  f = open("api.json", encoding='utf-8')
+  api = json.load(f)
+  url = api['url']
+  appID = api['appID']
+  appKey = api['appKey']
+  salt = api['salt']
   Main()
