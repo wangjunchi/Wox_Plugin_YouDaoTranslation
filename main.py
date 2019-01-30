@@ -46,14 +46,39 @@ class Main(Wox):
     payload = {'q': parse.quote(text), 'from': 'EN', 'to': 'zh-CHS', 'appKey': appID,'salt':salt, 'sign': md5}
     r = requests.get("http://openapi.youdao.com/api", params=payload)
     res = json.loads(r.text)
-    basic = res['basic']
 
-    results.append({
-      "Title": format(res['translation']).strip('[]\'') + " " + basic['phonetic'],
-      "SubTitle": "基本释义:" + " " + format(basic['explains']).strip('\'[]'),
-      "IcoPath":"Images/app.ico", 
-      "ContextData": "ctxData"
+    basic_flag = res.__contains__('basic')
+    web_flag = res.__contains__('web')
+   # web_flag = False
+    if res['errorCode']=='0':
+      if basic_flag:
+        basic = res['basic']
+
+      results.append({
+        "Title": format(res['translation']).strip('[]\'') + " " + (basic['phonetic'] if(basic_flag) else ''),
+        "SubTitle": "翻译结果",
+        "IcoPath":"Images/app.ico"
+      })
+
+      if basic_flag:
+        results.append({
+          "Title": format(basic['explains']).strip('\'[]'),
+          "SubTitle": "基本释义",
+          "IcoPath":"Images/app.ico",
         })
+
+      if web_flag:
+        web = res['web']
+        for i in range(len(web)):
+          web_res = web[i]
+          results.append({
+          "Title": format(web_res['value']),
+          "SubTitle": "网络释义: " + web_res['key'],
+          "IcoPath":"Images/app.ico"
+        })
+
+
+
     return results
     '''
     for i in bs.select(".comhead"):

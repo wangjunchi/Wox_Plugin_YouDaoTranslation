@@ -28,4 +28,15 @@ basic = res['basic']
 print(basic['explains'])
 print(format(basic['explains']))
 print(format(basic['explains']).strip('\'[]'))
-        
+print(res.__contains__('basic'))
+
+results=[]
+web = res['web']
+for web_res in web:
+    results.append({
+    "Title": web_res['value'],
+    "SubTitle": web_res['key'],
+    "IcoPath":"Images/app.ico", 
+    })
+
+print(results)
