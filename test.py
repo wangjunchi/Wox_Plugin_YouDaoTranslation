@@ -26,4 +26,6 @@ print(json.loads(r.text))
 print(type(res))
 basic = res['basic']
 print(basic['explains'])
+print(format(basic['explains']))
+print(format(basic['explains']).strip('\'[]'))
         

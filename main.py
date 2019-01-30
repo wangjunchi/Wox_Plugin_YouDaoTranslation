@@ -48,11 +48,10 @@ class Main(Wox):
     res = json.loads(r.text)
     basic = res['basic']
 
-    
     results.append({
-      "Title": "有道翻译",
-      "SubTitle": "Query: {}".format(basic['explains']),
-      "IcoPath":"Images/app.ico",
+      "Title": format(res['translation']).strip('[]\'') + " " + basic['phonetic'],
+      "SubTitle": "基本释义:" + " " + format(basic['explains']).strip('\'[]'),
+      "IcoPath":"Images/app.ico", 
       "ContextData": "ctxData"
         })
     return results
@@ -75,7 +74,6 @@ class Main(Wox):
         }
       })
       '''
-    return basic
   
 
 

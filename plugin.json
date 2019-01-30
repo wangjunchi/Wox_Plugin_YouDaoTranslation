@@ -4,7 +4,7 @@
     "Name":"yd_translation",                            
     "Description":"translation with yd",    
     "Author":"junchi",                     
-    "Version":"0.0.1",                      
+    "Version":"0.0.2",                      
     "Language":"python",                    
     "Website":"http://wangjunchi.github.io",         
     "IcoPath": "Images\\pic.png",              
