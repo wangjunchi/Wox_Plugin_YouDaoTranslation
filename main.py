@@ -22,16 +22,15 @@ class Main(Wox):
 
   #必须有一个query方法，用户执行查询的时候会自动调用query方法
   def query(self,key):
-    #r = self.request('https://news.ycombinator.com/')
-    #bs = BeautifulSoup(r.text)
     results = []
     query_params = key.split("|")
+    '''
     results.append({
         "Title": format(query_params),
         "SubTitle": "debug",
         "IcoPath":"Images/app.ico"
         })
-
+    '''
     target_language = 'zh-CHS'
     if len(query_params) >=2:
       text = query_params[0]
