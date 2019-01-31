@@ -36,9 +36,46 @@ class Main(Wox):
     md5 = token.upper()
     results = []
 
-    payload = {'q': parse.quote(text), 'from': 'EN', 'to': 'zh-CHS', 'appKey': appID,'salt':salt, 'sign': md5}
-    r = requests.get("http://openapi.youdao.com/api", params=payload)
-    res = json.loads(r.text)
+    payload = {'q': parse.quote(text), 'from': 'auto', 'to': 'zh-CHS', 'appKey': appID,'salt':salt, 'sign': md5}
+    
+    '''
+    request异常捕获
+    '''
+    try:
+      r = requests.get(url, params=payload,timeout=1)
+      res = json.loads(r.text)
+    except requests.exceptions.Timeout:
+      results.append({
+        "Title": "连接超时",
+        "SubTitle": "Timeout",
+        "IcoPath":"Images/app.ico"
+      })
+      return results
+    except requests.exceptions.ConnectionError:
+      results.append({
+        "Title": "连接错误",
+        "SubTitle": "ConnectionError",
+        "IcoPath":"Images/app.ico"
+      })
+      return results
+    except requests.exceptions.HTTPError:
+      results.append({
+        "Title": "HTTP错误",
+        "SubTitle": "HTTPError",
+        "IcoPath":"Images/app.ico"
+      })
+      return results
+
+    '''
+    有道json文件异常代码
+    '''
+    if res['errorCode']!='0':
+      results.append({
+        "Title": "错误代码：" + res['errorCode'],
+        "SubTitle": "请查询有道api文档查找错误原因",
+        "IcoPath":"Images/app.ico"
+      })
+      return results
 
     basic_flag = res.__contains__('basic')
     web_flag = res.__contains__('web')
