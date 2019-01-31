@@ -2,7 +2,7 @@
 
 ## 概述
 
-本项目c采用python编写，基于C#版本有道词典插件实现，C#版本[地址](https://github.com/Wox-launcher/Wox.Plugin.Youdao)
+本项目采用python编写，基于C#版本有道词典插件实现，C#版本[地址](https://github.com/Wox-launcher/Wox.Plugin.Youdao)
 
 ## 注意
 
