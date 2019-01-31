@@ -24,7 +24,27 @@ class Main(Wox):
   def query(self,key):
     #r = self.request('https://news.ycombinator.com/')
     #bs = BeautifulSoup(r.text)
-    text = key
+    results = []
+    query_params = key.split("|")
+    results.append({
+        "Title": format(query_params),
+        "SubTitle": "debug",
+        "IcoPath":"Images/app.ico"
+        })
+
+    target_language = 'zh-CHS'
+    if len(query_params) >=2:
+      text = query_params[0]
+      target_language = query_params[1]
+    elif len(query_params)==1:
+      text = query_params[0]
+      if text=='':
+        results.append({
+        "Title": "有道翻译",
+        "SubTitle": "请输入要查询的单词或短语",
+        "IcoPath":"Images/app.ico"
+        })
+        return results
 
     #生成MD5签名
     md5str = appID+text+salt+appKey
@@ -34,9 +54,9 @@ class Main(Wox):
     m1.update(md5str.encode("utf-8"))
     token = m1.hexdigest()
     md5 = token.upper()
-    results = []
+    
 
-    payload = {'q': parse.quote(text), 'from': 'auto', 'to': 'zh-CHS', 'appKey': appID,'salt':salt, 'sign': md5}
+    payload = {'q': parse.quote(text), 'from': 'auto', 'to': target_language, 'appKey': appID,'salt':salt, 'sign': md5}
     
     '''
     request异常捕获
