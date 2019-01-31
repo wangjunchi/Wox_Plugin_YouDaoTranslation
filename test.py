@@ -2,7 +2,7 @@ import requests
 import json
 from urllib import parse
 import hashlib
-text = 'hello'
+text = '你好'
 appID = '5ad5f54f99d85b29'
 appKey = '9UHXVW93LNJ0ig54NXBHzsO8M807ECTE'
 md5 = ''
@@ -17,7 +17,7 @@ token = m1.hexdigest()
 md5 = token.upper()
 
 print(md5)
-payload = {'q': parse.quote(text), 'from': 'EN', 'to': 'zh-CHS', 'appKey': appID,'salt':salt, 'sign': md5}
+payload = {'q': parse.quote(text), 'from': 'auto', 'to': 'uu', 'appKey': appID,'salt':salt, 'sign': md5}
 
 r = requests.get("http://openapi.youdao.com/api", params=payload)
 print(r.url)
