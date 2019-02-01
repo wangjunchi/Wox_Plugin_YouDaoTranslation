@@ -4,7 +4,7 @@ from urllib import parse
 import hashlib
 text = '你好'
 appID = '5ad5f54f99d85b29'
-appKey = '9UHXVW93LNJ0ig54NXBHzsO8M807ECTE'
+appKey = 'zmQOKrK8Lz8etCAjl5HYOPfKvtiWHaU2'
 md5 = ''
 salt='233'
 
