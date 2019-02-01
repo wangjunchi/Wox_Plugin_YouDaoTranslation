@@ -1,4 +1,7 @@
 {
+<<<<<<< HEAD
     "python.linting.enabled": true,
+=======
+>>>>>>> dev
     "python.linting.pylintEnabled": true
 }
