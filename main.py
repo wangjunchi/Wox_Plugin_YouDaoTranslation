@@ -31,10 +31,7 @@ class Main(Wox):
         "IcoPath":"Images/app.ico"
         })
     '''
-<<<<<<< HEAD
-=======
     
->>>>>>> dev
     target_language = 'zh-CHS'
     if len(query_params) >=2:
       text = query_params[0]
