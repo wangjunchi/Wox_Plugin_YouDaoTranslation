@@ -15,7 +15,7 @@
 
 ### 安装
 
-1. `clone`本项目或者直接下载zip压缩包并解压。
+1. clone本项目或者直接下载zip压缩包并解压。
 2. 将文件夹拷贝到`Wox`安装目录内的`plugin`文件夹内，示例路径：`C:\Users\wangj\AppData\Local\Wox\app-1.3.578\Plugins`，请确保进入文件夹后可以看到main.py等一系列文件而不是另一层文件夹。
 3. 打开Wox的`设置-插件`菜单，如果发现名为yd_translation的插件，说明安装成功。
 4. 重启Wox
