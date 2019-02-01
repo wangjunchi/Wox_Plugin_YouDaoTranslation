@@ -26,12 +26,14 @@ class Main(Wox):
     #bs = BeautifulSoup(r.text)
     results = []
     query_params = key.split("|")
+    '''
     results.append({
         "Title": format(query_params),
         "SubTitle": "debug",
         "IcoPath":"Images/app.ico"
         })
-
+    '''
+    
     target_language = 'zh-CHS'
     if len(query_params) >=2:
       text = query_params[0]
