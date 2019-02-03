@@ -3,7 +3,9 @@
 ## 概述
 
 本项目采用python编写，参照了C#版本有道词典插件代码并增加了多语言支持，C#版本[地址](https://github.com/Wox-launcher/Wox.Plugin.Youdao)
+
 **演示:**
+
 ![演示](http://oss.wangjunchi.top/yd/3_small.png)
 
 ## 重要
@@ -30,13 +32,15 @@
 ### 查询
 
 1. 在Wox窗口中输入`ydt`激活插件，并在一个空格后输入想查询的单词或短语。
-
+   
    示例：`ydt apple`
-![演示](http://oss.wangjunchi.top/yd/1_small.png)
+   
+   ![演示](http://oss.wangjunchi.top/yd/1_small.png)
 2. 可以在查询的单词或短语后加上一个`|`和[语言代码](https://ai.youdao.com/docs/doc-trans-api.s#p07)来指定翻译的目标语言。
-
+   
    示例：`ydt hello|ja`（翻译成日语）
-![演示](http://oss.wangjunchi.top/yd/2_small.png)
+   
+   ![演示](http://oss.wangjunchi.top/yd/2_small.png)
 ### 注意
 
 1. 只有中英互译可以实现查词典的功能，其他小语种翻译大部分只有翻译功能。
