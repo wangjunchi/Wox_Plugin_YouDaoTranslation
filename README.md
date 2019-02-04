@@ -6,7 +6,7 @@
 
 **演示:**
 
-![演示](http://oss.wangjunchi.top/yd/3_small.png)
+![kJ1pWR.png](https://s2.ax1x.com/2019/02/04/kJ1pWR.png)
 
 ## 重要
 
@@ -32,17 +32,20 @@
 ### 查询
 
 1. 在Wox窗口中输入`ydt`激活插件，并在一个空格后输入想查询的单词或短语。
-   
-   示例：`ydt apple`
-   
-   ![演示](http://oss.wangjunchi.top/yd/1_small.png)
-2. 可以在查询的单词或短语后加上一个`|`和[语言代码](https://ai.youdao.com/docs/doc-trans-api.s#p07)来指定翻译的目标语言。
-   
-   示例：`ydt hello|ja`（翻译成日语）
-   
-   ![演示](http://oss.wangjunchi.top/yd/2_small.png)
-### 注意
 
+   示例：`ydt apple`
+
+   
+
+   ![kJQYDS.png](https://s2.ax1x.com/2019/02/04/kJQYDS.png)
+
+   可以在查询的单词或短语后加上一个`|`和[语言代码](https://ai.youdao.com/docs/doc-trans-api.s#p07)来指定翻译的目标语言。
+
+   示例：`ydt hello|ja`（翻译成日语）
+
+   ![kJlzFJ.png](https://s2.ax1x.com/2019/02/04/kJlzFJ.png)
+
+   注意
 1. 只有中英互译可以实现查词典的功能，其他小语种翻译大部分只有翻译功能。
 2. 输入语言由有道服务器自动判断，当输入语言是中文时，默认目标语言是英语，且当目标语言代码错误时，服务器自动返回英语结果。当输入语言是非中文时，默认返回中文翻译结果。
 3. 若返回错误代码，请查阅[官方文档-错误代码](https://ai.youdao.com/docs/doc-trans-api.s#p08)。
