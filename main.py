@@ -4,12 +4,13 @@ from wox import Wox,WoxAPI
 import json
 from urllib import parse
 import hashlib
-
-
+import time
+import uuid
 #用户写的Python类必须继承Wox类 https://github.com/qianlifeng/Wox/blob/master/PythonHome/wox.py
 #这里的Wox基类做了一些工作，简化了与Wox通信的步骤。
 class Main(Wox):
-
+  my_uuid=""
+  curtime = ""
   def request(self,url):
     #如果用户配置了代理，那么可以在这里设置。这里的self.proxy来自Wox封装好的对象
     if self.proxy and self.proxy.get("enabled") and self.proxy.get("server"):
@@ -19,6 +20,20 @@ class Main(Wox):
       return requests.get(url,proxies = proxies)
     else:
       return requests.get(url)
+
+  def sign(self,ID,q,key):
+      self.curtime = str(int(time.time()))
+      length = len(q)
+      input=""
+      if length>20:
+        input = q[0:10] + str(length) + q[-10:]
+      else:
+        input = q
+      self.my_uuid = uuid.uuid1().hex
+      sha256 = hashlib.sha256()
+      sha256.update((ID+input+self.my_uuid+self.curtime+key).encode("utf-8"))
+      sign = sha256.hexdigest()
+      return sign
 
   #必须有一个query方法，用户执行查询的时候会自动调用query方法
   def query(self,key):
@@ -35,7 +50,14 @@ class Main(Wox):
     target_language = 'zh-CHS'
     if len(query_params) >=2:
       text = query_params[0]
-      target_language = query_params[1]
+      if query_params[1]:
+        target_language = query_params[1]
+      else:
+        results.insert(0,{
+        "Title": "输入语言代码",
+        "SubTitle": "常用小语种代码：日语:ja  法语:fr 德语:de",
+        "IcoPath":"Images/app.ico"
+        })
     elif len(query_params)==1:
       text = query_params[0]
       if text=='':
@@ -45,18 +67,17 @@ class Main(Wox):
         "IcoPath":"Images/app.ico"
         })
         return results
-
-    #生成MD5签名
-    md5str = appID+text+salt+appKey
-    #生成一个md5对象
-    m1 = hashlib.md5()
-    #使用md5对象里的update方法md5转换
-    m1.update(md5str.encode("utf-8"))
-    token = m1.hexdigest()
-    md5 = token.upper()
-    
-
-    payload = {'q': parse.quote(text), 'from': 'auto', 'to': target_language, 'appKey': appID,'salt':salt, 'sign': md5}
+        
+    try:
+      mysign = self.sign(appID,text,appKey)
+    except:
+      results.append({
+        "Title": "DEBUG",
+        "SubTitle": "sign计算异常",
+        "IcoPath":"Images/app.ico"
+        })
+      return results
+    payload = {'q': parse.quote(text), 'from': 'auto', 'to': target_language, 'appKey': appID,'salt':self.my_uuid, 'sign': mysign,'signType':'v3', 'curtime':self.curtime}
     
     '''
     request异常捕获
@@ -137,5 +158,4 @@ if __name__ == "__main__":
   url = api['url']
   appID = api['appID']
   appKey = api['appKey']
-  salt = api['salt']
   Main()
